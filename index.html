@@ -1,0 +1,120 @@
+<!DOCTYPE html>  
+<html lang="es">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Formulario de Inscripción - Seminario de Procesamiento de Lenguaje Natural</title>  
+    <style>  
+        body {  
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+            background-color: #e0f7fa;  
+            padding: 20px;  
+        }  
+        .container {  
+            max-width: 600px;  
+            margin: auto;  
+            background: #ffffff;  
+            padding: 20px;  
+            border-radius: 8px;  
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+        }  
+        h2 {  
+            text-align: center;  
+            color: #00796b;  
+        }  
+        label {  
+            display: block;  
+            margin: 10px 0 5px;  
+            color: #00796b;  
+        }  
+        input[type="text"], input[type="email"], input[type="number"], select {  
+            width: 100%;  
+            padding: 12px;  
+            margin-bottom: 10px;  
+            border: 1px solid #b2ebf2;  
+            border-radius: 4px;  
+        }  
+        button {  
+            background-color: #00796b;  
+            color: white;  
+            padding: 12px;  
+            border: none;  
+            border-radius: 5px;  
+            cursor: pointer;  
+            width: 100%;  
+        }  
+        button:hover {  
+            background-color: #004d40;  
+        }  
+        .error-message {  
+            color: red;  
+            font-size: 0.9em;  
+        }  
+        .success-message {  
+            color: green;  
+            font-size: 1em;  
+            margin-top: 20px;  
+            padding: 15px;  
+            border: 1px solid green;  
+            border-radius: 5px;  
+            background-color: #e0f2f1;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container">  
+        <h2>Inscripción Seminario de Procesamiento de Lenguaje Natural</h2>  
+        <form id="registrationForm">  
+            <label for="name">Nombre completo:</label>  
+            <input type="text" id="name" name="name" required>  
+
+            <label for="email">Correo electrónico:</label>  
+            <input type="email" id="email" name="email" required>  
+
+            <label for="age">Edad:</label>  
+            <input type="number" id="age" name="age" min="18" required>  
+
+            <label for="nationality">Nacionalidad:</label>  
+            <select id="nationality" name="nationality" required>  
+                <option value="">Seleccione su nacionalidad</option>  
+                <option value="Peruano">Peruano</option>  
+                <option value="Extranjero">Extranjero</option>  
+            </select>  
+
+            <p class="error-message" id="error" style="display: none;"></p>  
+            <div id="success" class="success-message" style="display: none;"></div>
+            <button type="submit">Inscribirse</button>  
+        </form>  
+    </div>  
+
+    <script>  
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {  
+            event.preventDefault();  
+            const name = document.getElementById('name').value;  
+            const email = document.getElementById('email').value;  
+            const age = document.getElementById('age').value;  
+            const nationality = document.getElementById('nationality').value;  
+            const errorMessage = document.getElementById('error');  
+            const successMessage = document.getElementById('success');  
+
+            if (age < 18) {  
+                errorMessage.innerText = 'Debes tener al menos 18 años para inscribirte.';  
+                errorMessage.style.display = 'block';  
+                successMessage.style.display = 'none';  
+                return;  
+            }  
+
+            if (nationality !== 'Peruano') {  
+                errorMessage.innerText = 'Solo se admiten personas de nacionalidad peruana.';  
+                errorMessage.style.display = 'block';  
+                successMessage.style.display = 'none';  
+                return;  
+            }  
+
+            errorMessage.style.display = 'none';  
+            successMessage.innerHTML = `<strong>Inscripción exitosa:</strong><br>Nombre: ${name}<br>Correo: ${email}<br>Edad: ${age}<br>Nacionalidad: ${nationality}<br>¡Te esperamos en el seminario!`;  
+            successMessage.style.display = 'block';  
+        });  
+    </script>  
+</body>  
+</html>
